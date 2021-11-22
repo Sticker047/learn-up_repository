@@ -1,4 +1,4 @@
-package Objects.TypesOfWagons;
+package objects.typesOfWagons;
 
 public class EconomClassTrain extends Coach {
     protected String type = "Плацкартный вагон";

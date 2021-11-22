@@ -1,4 +1,4 @@
-package Objects.TypesOfWagons;
+package objects.typesOfWagons;
 
 public class CompartmentCarriage extends Coach {
 

@@ -1,6 +1,6 @@
-package Objects.TypesOfWagons;
+package objects.typesOfWagons;
 
-import Objects.Wagon;
+import objects.Wagon;
 
 public class FreightCar extends Wagon {
     protected String type = "Грузовой вагон";

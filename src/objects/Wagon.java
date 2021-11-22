@@ -1,6 +1,4 @@
-package Objects;
-
-import Objects.TypesOfWagons.*;
+package objects;
 
 import java.awt.*;
 
