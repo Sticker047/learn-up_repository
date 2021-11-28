@@ -2,7 +2,7 @@ package objects;
 
 import java.awt.*;
 
-public class Wagon {
+public abstract class Wagon {
     private static int count = 0;
 
     private int number;
@@ -10,7 +10,7 @@ public class Wagon {
     private float height;
     private float width;
     private float weightOfEmpty;
-    protected String type = "";
+    protected String type;
 
     public Wagon(int number, Color color, float height, float width, float weightOfEmpty) {
         this.number = number;
@@ -21,7 +21,7 @@ public class Wagon {
     }
 
     public Wagon() {
-        this.number = count + 1;
+        this.number = count++;
         count++;
 
         Color[] randomColors = new Color[]{Color.black, Color.white, Color.green, Color.red, Color.blue, Color.yellow};

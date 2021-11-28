@@ -50,7 +50,7 @@ public class Train extends Entity {
         this.typeOfTrain = typeOfTrain;
     }
 
-    public Train(float x, float y, float scale, float speed, TextureAtlas atlas){
+    public Train(float x, float y, float scale, float speed, TextureAtlas atlas) {
         super(EntityType.Train, x, y);
 
         heading = Heading.CompartmentCarriage;
@@ -58,7 +58,7 @@ public class Train extends Entity {
         this.scale = scale;
         this.speed = speed;
 
-        for (Heading h : Heading.values()){
+        for (Heading h : Heading.values()) {
             SpriteSheet sheet = new SpriteSheet(h.texture(atlas), SPRITES_PER_HEADING, SPRITE_SCALE);
             Sprite sprite = new Sprite(sheet, scale);
             spriteMap.put(heading, sprite);
@@ -69,7 +69,7 @@ public class Train extends Entity {
 
             wagons = new Wagon[(int) Math.round(6 + Math.random() * 6)];
             for (int i = 0; i < wagons.length; i++)
-                wagons[i] = createRandomWagon();
+                wagons[i] = createRandomWagonOrNullIfException();
         }
     }
 
@@ -83,37 +83,37 @@ public class Train extends Entity {
                 "\nТип поезда: " + typeOfTrain;
     }
 
-    public Wagon createRandomWagon() {
+    public Wagon createRandomWagonOrNullIfException() {
         int rnd = (int) Math.round(Math.random() * 4);
 
+        boolean created = false;
         Wagon wagon;
         switch (rnd) {
             case 0: {
                 wagon = new Coach();
+                return wagon;
             }
-            break;
             case 1: {
                 wagon = new CompartmentCarriage();
+                return wagon;
             }
-            break;
             case 2: {
                 wagon = new EconomClassTrain();
+                return wagon;
             }
-            break;
             case 3: {
                 wagon = new FreightCar();
+                return wagon;
             }
-            break;
             case 4: {
                 wagon = new SleepingCar();
+                return wagon;
             }
-            break;
             default: {
-                wagon = new Wagon();
             }
         }
+        return null;
 
-        return wagon;
     }
 
     @Override

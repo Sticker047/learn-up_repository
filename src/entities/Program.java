@@ -21,14 +21,14 @@ public class Program implements Runnable {
     public static final float UPDATE_INTERVAL = Time.SECOND / UPDATE_RATE;
     public static final long IDLE_TIME = 1;
 
-    public static final String ATLAS_FILE_NAME = "trains_atlas.jpg";
+    public static final String ATLAS_FILE_NAME = "try1.jpg";
 
     private boolean running;
     private Thread programThread;
-    private Graphics2D graphics;
-    private Input input;
-    private TextureAtlas atlas;
-    private Train train;
+    private final Graphics2D graphics;
+    private final Input input;
+    //private final TextureAtlas atlas;
+    private final Train train;
 
     public Program(){
 
@@ -36,8 +36,8 @@ public class Program implements Runnable {
         Window.create(WIDTH, HEIGHT, TITLE, CLEAR_COLOR, NUM_BUFFERS);
         graphics = Window.getGraphics();
         input = new Input();
-        atlas = new TextureAtlas(ATLAS_FILE_NAME);
-        train = new Train(300, 300, 2, 3, atlas);
+        //atlas = new TextureAtlas(ATLAS_FILE_NAME);
+        train = new Train(300, 300, 2, 3, null);
 
     }
 
