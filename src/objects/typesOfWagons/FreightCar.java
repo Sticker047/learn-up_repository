@@ -2,7 +2,7 @@ package objects.typesOfWagons;
 
 import objects.Wagon;
 
-public class FreightCar extends Wagon {
+public class FreightCar extends Wagon implements Comparable<Wagon> {
     protected String type = "Грузовой вагон";
     private float liftingCapacity; // Грузоподъёмность
 
@@ -17,4 +17,10 @@ public class FreightCar extends Wagon {
                 "\nГрузоподъемность вагона: " + liftingCapacity;
     }
 
+    @Override
+    public int compareTo(Wagon o) {
+        if (this.getLength() > o.getLength()) return 1;
+        else if (this.getLength() < o.getLength()) return -1;
+        return 0;
+    }
 }

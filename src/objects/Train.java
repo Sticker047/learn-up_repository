@@ -3,6 +3,7 @@ package objects;
 import IO.Input;
 import entities.Entity;
 import entities.EntityType;
+import entities.IRefueled;
 import graphics.Sprite;
 import graphics.SpriteSheet;
 import graphics.TextureAtlas;
@@ -13,10 +14,25 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Train extends Entity {
+public class Train extends Entity implements IRefueled {
 
     public static final int SPRITE_SCALE = 16;
     public static final int SPRITES_PER_HEADING = 1;
+
+    public float fuel;
+    public static final float MAX_FUEL = 1000;
+
+    @Override
+    public void refuel(float litres) {
+        if (fuel + litres > MAX_FUEL) fuel = MAX_FUEL;
+        else if (litres < 0) return;
+        else fuel += litres;
+    }
+
+    @Override
+    public void drainFuel() {
+        fuel = 0;
+    }
 
     private enum Heading {
         CompartmentCarriage(0, 0, 60, 300);
@@ -53,6 +69,7 @@ public class Train extends Entity {
     public Train(float x, float y, float scale, float speed, TextureAtlas atlas) {
         super(EntityType.Train, x, y);
 
+        fuel = 0;
         heading = Heading.CompartmentCarriage;
         spriteMap = new HashMap<Heading, Sprite>();
         this.scale = scale;

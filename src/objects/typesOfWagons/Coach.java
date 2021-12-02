@@ -2,7 +2,7 @@ package objects.typesOfWagons;
 
 import objects.Wagon;
 
-public class Coach extends Wagon {
+public class Coach extends Wagon implements Comparable<Wagon>{
     protected String type = "Пассажирский вагон";
 
     protected int priceOfTicket;
@@ -18,4 +18,10 @@ public class Coach extends Wagon {
                 + "\nСтоимость билета: " + priceOfTicket + ".00р";
     }
 
+    @Override
+    public int compareTo(Wagon o) {
+        if (this.getLength() > o.getLength()) return 1;
+        else if (this.getLength() < o.getLength()) return -1;
+        return 0;
+    }
 }
