@@ -1,6 +1,6 @@
 package entities;
 
-public interface IRefueled {
+public interface Refueled {
     void refuel(float litres);
 
     void drainFuel();

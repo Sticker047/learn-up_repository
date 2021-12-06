@@ -3,18 +3,20 @@ package objects;
 import IO.Input;
 import entities.Entity;
 import entities.EntityType;
-import entities.IRefueled;
+import entities.Refueled;
 import graphics.Sprite;
 import graphics.SpriteSheet;
 import graphics.TextureAtlas;
 import objects.typesOfWagons.*;
+import utils.IncorrectInputDataException;
+import utils.RefuelException;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Train extends Entity implements IRefueled {
+public class Train extends Entity implements Refueled {
 
     public static final int SPRITE_SCALE = 16;
     public static final int SPRITES_PER_HEADING = 1;
@@ -22,10 +24,14 @@ public class Train extends Entity implements IRefueled {
     public float fuel;
     public static final float MAX_FUEL = 1000;
 
+    public static final int MIN_COUNT_WAGON = 6;
+    public static final int MAX_COUNT_WAGON = 12;
+
     @Override
-    public void refuel(float litres) {
+    public void refuel(float litres) throws RefuelException
+    {
         if (fuel + litres > MAX_FUEL) fuel = MAX_FUEL;
-        else if (litres < 0) return;
+        else if (litres < 0) throw new RefuelException(litres);
         else fuel += litres;
     }
 
@@ -62,6 +68,8 @@ public class Train extends Entity implements IRefueled {
     private Wagon[] wagons;
 
     public Train(int countOfWagons, String typeOfTrain) {
+        if (countOfWagons < MIN_COUNT_WAGON || countOfWagons > MAX_COUNT_WAGON)
+            throw new IncorrectInputDataException(MIN_COUNT_WAGON, MAX_COUNT_WAGON);
         this.countOfWagons = countOfWagons;
         this.typeOfTrain = typeOfTrain;
     }
@@ -84,7 +92,7 @@ public class Train extends Entity implements IRefueled {
             String[] types = new String[]{"Высокоскоростной", "Скоростной", "Скорый"};
             this.typeOfTrain = types[(int) Math.round(Math.random() * (types.length - 1))];
 
-            wagons = new Wagon[(int) Math.round(6 + Math.random() * 6)];
+            wagons = new Wagon[(int) Math.round(MIN_COUNT_WAGON + Math.random() * 6)];
             for (int i = 0; i < wagons.length; i++)
                 wagons[i] = createRandomWagonOrNullIfException();
         }
