@@ -63,11 +63,11 @@ public class Train extends Entity implements Refueled {
     private float speed;
 
     private int countOfWagons;
-    private String typeOfTrain;
+    private TypeOfTrain typeOfTrain;
 
     private Wagon[] wagons;
 
-    public Train(int countOfWagons, String typeOfTrain) {
+    public Train(int countOfWagons, TypeOfTrain typeOfTrain) {
         if (countOfWagons < MIN_COUNT_WAGON || countOfWagons > MAX_COUNT_WAGON)
             throw new IncorrectInputDataException(MIN_COUNT_WAGON, MAX_COUNT_WAGON);
         this.countOfWagons = countOfWagons;
@@ -89,7 +89,7 @@ public class Train extends Entity implements Refueled {
             spriteMap.put(heading, sprite);
 
             this.countOfWagons = (int) (6 + Math.round(Math.random() * 6));
-            String[] types = new String[]{"Высокоскоростной", "Скоростной", "Скорый"};
+            TypeOfTrain[] types = TypeOfTrain.values();
             this.typeOfTrain = types[(int) Math.round(Math.random() * (types.length - 1))];
 
             wagons = new Wagon[(int) Math.round(MIN_COUNT_WAGON + Math.random() * 6)];
